@@ -1,0 +1,14 @@
+{% extends 'tasks/base.html'%}
+
+{% block body %}
+	{% block set_act %}active{% endblock %}
+<div class="row">
+		<div class="jumbotron col-lg-8 offset-lg-2 col-sm-10 offset-sm-1 shadow p-3 mb-5 bg-white" style="margin-top: 40px; padding-left: 30px">
+	  <h1 class="display-4">What's new?</h1>
+	  <p class="lead">Release 1.0:</p>
+	  <hr class="my-4">
+	  <p>Welcome to Todoist! This is your newest and the most modern approach to productivity. Click on the button below to learn more!</p>
+	  <a class="btn btn-primary" href="{% url 'tasks:about' %}" role="button">Learn more</a>
+	</div>
+</div>
+{% endblock %}

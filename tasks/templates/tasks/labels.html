@@ -1,0 +1,32 @@
+{% extends 'tasks/base.html' %}
+
+{% block body %}
+	{% block lab_act %}active{% endblock %}
+
+	<div class="row">
+		<div class="col-lg-6 offset-lg-3 col-sm-10 shadow p-3 mb-5 bg-white" style="margin-top: 40px; padding-left: 20px">
+			<h6 style="text-align: right"><a href="{% url 'tasks:label_add' %}">Add a new label</a> </h6>
+			<h4 style="text-align: center"> Labels</h4>
+			<table class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col">Sr. no.</th>
+			      <th scope="col">Label</th>
+			      <th scope="col"></th>
+			    </tr>
+			  </thead>
+			  <tbody>
+				  {% for label in labels %}
+					    <tr>
+					      <th scope="row">{{ forloop.counter }}</th>
+					      <td>{{ label.name }}</td>
+					      <td><a href="{% url 'tasks:label_edit' label.id %}">Manage</a>&nbsp; &nbsp; &nbsp;<a href="{% url 'tasks:label_delete' label.id %}">Delete</a> </td>
+					    </tr>
+				  {% endfor %}
+			  </tbody>
+			</table>
+		</div>
+	</div>
+
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'tasks/base.html' %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-lg-6 offset-lg-3 col-sm-10 shadow p-3 mb-5 bg-white" style="margin-top: 40px; padding-left: 20px">
+			<form action="" method="post">
+				{% csrf_token %}
+				{% include 'tasks/form-template.html' %}
+				<div>
+					<button class="btn btn-outline-dark d-flex justify-content-end" type="submit">Submit</button>
+				</div>
+			</form>
+		</div>
+
+	</div>
+
+{% endblock %}

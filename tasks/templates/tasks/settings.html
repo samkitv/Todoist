@@ -1,0 +1,11 @@
+{% extends 'tasks/base.html' %}
+
+{% block body %}
+	{% block set_act %}active{% endblock %}
+
+	<div class="row">
+		<div class="col-lg-2 offset-lg-5 col-sm-10 shadow p-3 mb-5 bg-white" onclick="location.href='{% url 'tasks:whatsnew' %}'" style="margin-top: 40px; padding-left: 20px; text-align: center"> <h6>What's new?</h6>	</div>
+		<div class="col-lg-2 offset-lg-5 col-sm-10 shadow p-3 mb-5 bg-white" onclick="location.href='{% url 'tasks:about' %}'" style="padding-left: 20px; text-align: center"> <h6>About Todoist</h6>	</div>
+
+	</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'tasks/base.html' %}
+
+{% block body %}
+	{% block rep_act %} active {% endblock %}
+	<div class="row">
+		<div class="col-lg-6 offset-lg-3 col-sm-10 offset-sm-1 shadow p-3 mb-5 bg-white" style="margin-top: 40px; padding-left: 20px">
+			<h6 style="text-align: right"><button class="btn btn-outline-dark" onclick="window.print()">Print Reports </button> </h6>
+			<h4 style="text-align: center"> Reports</h4>
+			<table class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col">Date</th>
+			      <th scope="col">Tasks</th>
+			      <th scope="col">Bonus</th>
+			      <th scope="col">Total</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+				  {% for row in rep %}
+					    <tr>
+					      <th scope="row">{{ row.0 }}</th>
+					      <td>{{ row.1.points__sum }}</td>
+					      <td>{{ row.2.points__sum }}</td>
+					      <td>{{ row.3.points__sum }}</td>
+					    </tr>
+				  {% endfor %}
+			  </tbody>
+			</table>
+		</div>
+	</div>
+
+
+
+
+
+
+{% endblock %}

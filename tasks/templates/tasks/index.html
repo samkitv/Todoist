@@ -1,0 +1,105 @@
+{% extends 'tasks/base.html' %}
+
+{% block body %}
+	{% block task_act %}active{% endblock %}
+	<div class="container" style="padding-top: 50px">
+		<div class="row">
+			<div class="col-lg-4 col-sm-12" id="day_overview">
+				<h1>{{ date }}</h1>
+				<h2>{{ day }} </h2>
+				<br>
+				<form onsubmit="location.href='tasks/'+dateselect.value" method="post">
+					{% csrf_token %}
+					<label style="text-align-all: center">Jump to date</label><br>
+					<input type="date" id="date" name="dateselect"><br><br>
+					<button class="btn btn-outline-dark btn-sm" onclick=" location.href='{% url 'tasks:task_date' date %}'">Submit</button>
+				</form>
+
+
+			</div>
+			<div class="col-lg-8 col-sm-12" id="task_list">
+				{% if rem_tasks %}
+						<h6>Pending tasks</h6> <br>
+						{% for task in rem_tasks %}
+							<ul>
+								<div class="shadow p-3 mb-5 bg-white rounded" >
+									<div class="row">
+										<div class="col-lg-9 col-sm-12">
+											<h4>{{ task.name }}</h4>
+											{% if task.time %}
+												<h6>Scheduled {{ task.time }}</h6>
+											{% endif %}
+											{% if task.label %}
+												<h6><span class="badge badge-secondary">{{ task.label }}</span> </h6>
+											{% endif %}
+											{% if task.isBonus %}
+												<h6><span class="badge badge-info">BONUS</span> </h6>
+											{% endif %}
+										</div>
+										<div class="col-lg-3 col-sm-12">
+											<div class="">
+												<h1 style="font-family: 'Bebas Neue','sans-serif'; color: darkgray">+ {{ task.points }}</h1>
+											</div>
+											<div class="btn-group btn-group-sm" role="group">
+												<button type="button" class="btn btn-success" onclick="location.href='{% url 'tasks:task_done' task.id %}'" >&nbsp; Done! &nbsp;</button>
+												<button type="button"  class="btn btn-outline-secondary" onclick="location.href='{% url 'tasks:task_edit' task.id %}'"><i class="material-icons">edit</i> </button>
+												<button type="button" class="btn btn-outline-danger" onclick="location.href='{% url 'tasks:task_delete' task.id %}'"><i class="material-icons">delete</i></button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</ul>
+						{% endfor %}
+
+				{% else %}
+					<h3>You have no incomplete tasks.</h3>
+				{% endif %}
+
+
+				{% if done_tasks %}
+						<br><h6>Complete tasks</h6> <br>
+						{% for task in done_tasks %}
+							<ul>
+								<div class="shadow p-3 mb-5 rounded">
+									<div class="row">
+										<div class="col-lg-9 col-sm-12">
+											<h4>{{ task.name }}</h4>
+											{% if task.label %}
+												<h6><span class="badge badge-secondary">{{ task.label }}</span> </h6>
+											{% endif %}
+											{% if task.isBonus %}
+												<h6><span class="badge badge-secondary">BONUS</span> </h6>
+											{% endif %}
+										</div>
+										<div class="col-lg-3 col-sm-12">
+											<div class="">
+												<h1 style="font-family: 'Bebas Neue','sans-serif'; color: green">+ {{ task.points }}</h1>
+											</div>
+											<div class="btn-group btn-group-sm" role="group">
+
+												<button type="button" class="btn btn-success" onclick="location.href='{% url 'tasks:task_undone' task.id %}'" >&nbsp; Undo &nbsp;</button>
+
+												<button type="button" class="btn btn-outline-danger" onclick="location.href='{% url 'tasks:task_delete' task.id %}'"><i class="material-icons">delete</i></button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</ul>
+						{% endfor %}
+
+
+				{% endif %}
+
+			</div>
+		</div>
+
+
+	</div>
+
+	<script>
+		function jump_to_date(date) {
+		    date=dateselect.value()
+
+        }
+	</script>
+{% endblock %}
